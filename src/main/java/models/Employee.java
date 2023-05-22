@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 /**
  * 従業員データのDTOモデル
  *
@@ -27,15 +28,13 @@ import lombok.Setter;
             query = JpaConst.Q_EMP_GET_ALL_DEF),
     @NamedQuery(
             name = JpaConst.Q_EMP_COUNT,
-            query = JpaConst.Q_EMP_GET_ALL_DEF),
+            query = JpaConst.Q_EMP_COUNT_DEF),
     @NamedQuery(
             name = JpaConst.Q_EMP_COUNT_REGISTERED_BY_CODE,
             query = JpaConst.Q_EMP_COUNT_REGISTERED_BY_CODE_DEF),
     @NamedQuery(
             name = JpaConst.Q_EMP_GET_BY_CODE_AND_PASS,
             query = JpaConst.Q_EMP_GET_BY_CODE_AND_PASS_DEF)
-
-
 })
 
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)
@@ -52,6 +51,7 @@ public class Employee {
     @Column(name = JpaConst.EMP_COL_ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     /**
      * 社員番号
      */
@@ -93,6 +93,5 @@ public class Employee {
      */
     @Column(name = JpaConst.EMP_COL_DELETE_FLAG, nullable = false)
     private Integer deleteFlag;
-
 
 }

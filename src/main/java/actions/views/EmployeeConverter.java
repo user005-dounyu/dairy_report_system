@@ -26,20 +26,23 @@ public class EmployeeConverter {
                 ev.getName(),
                 ev.getPassword(),
                 ev.getAdminFlag() == null
-                    ?null
-                    :ev.getAdminFlag() == AttributeConst.ROLE_ADMIN.getIntegerValue()
-                        ?JpaConst.ROLE_ADMIN
-                        :JpaConst.ROLE_GENERAL,
+                        ? null
+                        : ev.getAdminFlag() == AttributeConst.ROLE_ADMIN.getIntegerValue()
+                                ? JpaConst.ROLE_ADMIN
+                                : JpaConst.ROLE_GENERAL,
                 ev.getCreatedAt(),
                 ev.getUpdatedAt(),
                 ev.getDeleteFlag() == null
                         ? null
-                        :JpaConst.EMP_DEL_FALSE);
+                        : ev.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()
+                                ? JpaConst.EMP_DEL_TRUE
+                                : JpaConst.EMP_DEL_FALSE);
     }
+
     /**
-     * DTOモデルのリストからViewモデルのリストを作成する
-     * @param list DTOモデルのリスト
-     * @return Viewモデルのリスト
+     * DTOモデルのインスタンスからViewモデルのインスタンスを作成する
+     * @param e Employeeのインスタンス
+     * @return EmployeeViewのインスタンス
      */
     public static EmployeeView toView(Employee e) {
 
@@ -66,6 +69,11 @@ public class EmployeeConverter {
                                 : AttributeConst.DEL_FLAG_FALSE.getIntegerValue());
     }
 
+    /**
+     * DTOモデルのリストからViewモデルのリストを作成する
+     * @param list DTOモデルのリスト
+     * @return Viewモデルのリスト
+     */
     public static List<EmployeeView> toViewList(List<Employee> list) {
         List<EmployeeView> evs = new ArrayList<>();
 
@@ -91,6 +99,6 @@ public class EmployeeConverter {
         e.setUpdatedAt(ev.getUpdatedAt());
         e.setDeleteFlag(ev.getDeleteFlag());
 
-
     }
+
 }
